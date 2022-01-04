@@ -1,0 +1,19 @@
+cenario_1:
+  cen_nome: nome do cenário de teste
+  cen_desc: descrição do cenário de teste
+  cen_pre_requisitos: pré requisitos do cenário de teste
+  pasta_evidencias: /Users/julianaalbuquerque/Documents/evidencias/cenario_1
+  passo_1: primeiro passo
+  resultado_1: resultado esperado
+  passo_2: segundo passo
+  resultado_2: resultado esperado
+
+cenario_2:
+  cen_nome: nome do cenário de teste
+  cen_desc: descrição do cenário de teste
+  cen_pre_requisitos: pré requisitos do cenário de teste
+  pasta_evidencias: /Users/julianaalbuquerque/Documents/evidencias/cenario_2
+  passo_1: primeiro passo
+  resultado_1: resultado esperado
+  passo_2: segundo passo
+  resultado_2: resultado esperado

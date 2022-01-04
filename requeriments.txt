@@ -1,0 +1,4 @@
+nose
+docx
+python-docx
+PyYAML
