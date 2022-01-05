@@ -10,7 +10,6 @@ with open('data/dados.yaml') as arquivo:
 
 #Deescobrindo quantos cenários foram executados
 lista_cen = len(dados)
-print(lista_cen)
 
 #Percorrer a lista de cenários
 count = 1
@@ -60,7 +59,6 @@ while count <= lista_cen:
     #percorrer os campos de cada cenário
     passos = (lista_dados - 9)/2
     count1 = 1
-    print(int(passos))
     while count1 <= int(passos):
         cen_passo = 'passo_'+str(count1)
         cen_resultado = 'resultado_'+str(count1)
@@ -78,7 +76,7 @@ while count <= lista_cen:
         p.add_run(str(dados[cen][cen_resultado]))
 
         doc.add_picture(evidencia, width=Inches(2.50))
-        p = doc.add_paragraph().paragraph_format.space_before = Pt(12)
+        p = doc.add_paragraph().paragraph_format.space_before = Pt(6)
         os.remove(evidencia)
 
         count1 = count1+1
@@ -86,6 +84,10 @@ while count <= lista_cen:
     nome_cenario = str(dados[cen]['cen_nome'])
     path_doc = str(dados[cen]['pasta_evidencias'])+'/'+nome_cenario[0:21]+' - '+str(dados[cen]['cen_dispositivo'])+'.docx'
     doc.save(path_doc)
+    print("==============================================================\n")
+    print("Evidência "+nome_cenario[0:21]+" Gerada com sucesso!")
+    print("\n==============================================================")
+
 
     count = count+1
 
