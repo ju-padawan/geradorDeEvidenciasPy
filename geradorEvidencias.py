@@ -1,6 +1,8 @@
 from docx import Document
 from docx.shared import Inches
+from docx.shared import Pt
 import yaml
+import os
 
 
 with open('data/dados.yaml') as arquivo:
@@ -16,33 +18,47 @@ while count <= lista_cen:
     #Descobrindo quantos campos tem em cada cenário
     cen = 'cenario_'+str(count)
     lista_dados = len(dados[cen])
-    print(lista_dados)
-
-    cen_nome = dados[cen]['cen_nome']
-    cen_desc = dados[cen]['cen_desc']
-    cen_pre_requisitos = dados[cen]['cen_pre_requisitos']
     pasta_evidencias = dados[cen]['pasta_evidencias']
 
-    print(str(cen_nome))
-    print(str(cen_desc))
-    print(str(cen_pre_requisitos))
-    print(str(pasta_evidencias))
-
     doc = Document()
-    doc.add_heading(cen_nome, 0)
+    style = doc.styles['Normal']
+    font = style.font
+    font.name = 'Arial'
+    font.size = Pt(12)
 
-    p = doc.add_paragraph('Descrição: ')
-    p = doc.add_paragraph(str(cen_desc))
-    p.paragraph_format.left_indent = Inches(0.5)
-    p.paragraph_format.space_after = Inches(0.35)
+    doc.add_heading(str(dados[cen]['cen_nome']), 0)
 
-    p = doc.add_paragraph('Pré-requisios: ')
-    p = doc.add_paragraph(str(cen_pre_requisitos))
-    p.paragraph_format.left_indent = Inches(0.5)
-    p.paragraph_format.space_after = Inches(0.35)
+    p = doc.add_paragraph()
+    p.add_run('Descrição: ').bold = True
+    p.add_run(str(dados[cen]['cen_desc']))
+
+    p = doc.add_paragraph()
+    p.add_run('Pré-requisitos: ').bold = True
+    p.add_run(str(dados[cen]['cen_pre_requisitos']))
+
+    p = doc.add_paragraph()
+    p.add_run('Data da execução: ').bold = True
+    p.add_run(str(dados[cen]['cen_data_execucao']))
+
+    p = doc.add_paragraph()
+    p.add_run('Executado por: ').bold = True
+    p.add_run(str(dados[cen]['cen_executor']))
+
+    p = doc.add_paragraph()
+    p.add_run('Status execução: ').bold = True
+    p.add_run(str(dados[cen]['cen_status_execucao']))
+
+    p = doc.add_paragraph()
+    p.add_run('Massa utilizada: ').bold = True
+    p.add_run(str(dados[cen]['cen_massa']))
+
+    p = doc.add_paragraph()
+    p.add_run('Disposiitivo uilizado: ').bold = True
+    p.add_run(str(dados[cen]['cen_dispositivo']))
+    p = doc.add_paragraph().paragraph_format.space_before = Pt(12)
 
     #percorrer os campos de cada cenário
-    passos = (lista_dados - 4)/2
+    passos = (lista_dados - 9)/2
     count1 = 1
     print(int(passos))
     while count1 <= int(passos):
@@ -53,23 +69,21 @@ while count <= lista_cen:
 
         txt_passo = '[Passo_'+str(count1)+']: '
 
-        p = doc.add_paragraph(txt_passo).bold = True
-        p = doc.add_paragraph((str(cen_passo)))
-        p.paragraph_format.left_indent = Inches(0.5)
+        p = doc.add_paragraph()
+        p.add_run(txt_passo).bold = True
+        p.add_run(str(dados[cen][cen_passo]))
 
+        p = doc.add_paragraph()
+        p.add_run('Resultado esperado: ').bold = True
+        p.add_run(str(dados[cen][cen_resultado]))
 
-        p = doc.add_paragraph('Resultado esperado: ').bold = True
-        p = doc.add_paragraph((str(cen_resultado)))
-        p.paragraph_format.left_indent = Inches(0.5)
+        doc.add_picture(evidencia, width=Inches(2.50))
+        os.remove(evidencia)
 
-        doc.add_picture(evidencia, width=Inches(6.25))
-
-        print(dados[cen][cen_passo])
-        print(dados[cen][cen_resultado])
         count1 = count1+1
 
-
-    path_doc = str(dados[cen]['pasta_evidencias'])+'/teste-evidencia.docx'
+    nome_cenario = str(dados[cen]['cen_nome'])
+    path_doc = str(dados[cen]['pasta_evidencias'])+'/'+nome_cenario[0:21]+' - '+str(dados[cen]['cen_dispositivo'])+'.docx'
     doc.save(path_doc)
 
     count = count+1
