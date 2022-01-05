@@ -78,6 +78,7 @@ while count <= lista_cen:
         p.add_run(str(dados[cen][cen_resultado]))
 
         doc.add_picture(evidencia, width=Inches(2.50))
+        p = doc.add_paragraph().paragraph_format.space_before = Pt(12)
         os.remove(evidencia)
 
         count1 = count1+1
