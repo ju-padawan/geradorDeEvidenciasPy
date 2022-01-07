@@ -1,3 +1,5 @@
+import docx
+from docx.text.run import *
 from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
@@ -36,32 +38,50 @@ while count <= lista_cen:
     p.add_run(str(dados[cen]['cen_pre_requisitos']))
 
     p = doc.add_paragraph()
-    p.add_run('Data da execução: ').bold = True
-    p.add_run(str(dados[cen]['cen_data_execucao']))
+    p.add_run('Resultado esperado: ').bold = True
+    p.add_run(str(dados[cen]['resultado_esperado']))
+
+    p = doc.add_paragraph()
+    p.add_run('Disposiitivo uilizado: ').bold = True
+    p.add_run(str(dados[cen]['cen_plataforma']))
+
+    p = doc.add_paragraph()
+    p.add_run('Disposiitivo uilizado: ').bold = True
+    p.add_run(str(dados[cen]['cen_dispositivo']))
+
+    p = doc.add_paragraph()
+    p.add_run('Versão do Software: ').bold = True
+    p.add_run(str(dados[cen]['cen_versao_software']))
+
+    p = doc.add_paragraph()
+    p.add_run('Versão do App Next: ').bold = True
+    p.add_run(str(dados[cen]['cen_versao_app']))
 
     p = doc.add_paragraph()
     p.add_run('Executado por: ').bold = True
     p.add_run(str(dados[cen]['cen_executor']))
 
     p = doc.add_paragraph()
-    p.add_run('Status execução: ').bold = True
-    p.add_run(str(dados[cen]['cen_status_execucao']))
-
-    p = doc.add_paragraph()
-    p.add_run('Massa utilizada: ').bold = True
+    p.add_run('Massa uilizada: ').bold = True
     p.add_run(str(dados[cen]['cen_massa']))
 
     p = doc.add_paragraph()
-    p.add_run('Disposiitivo uilizado: ').bold = True
-    p.add_run(str(dados[cen]['cen_dispositivo']))
-    p = doc.add_paragraph().paragraph_format.space_before = Pt(12)
+    p.add_run('Data da execução: ').bold = True
+    p.add_run(str(dados[cen]['cen_data_execucao']))
+
+    p = doc.add_paragraph()
+    p.add_run('Status execução: ').bold = True
+    p.add_run(str(dados[cen]['cen_status_execucao']))
+    #p = doc.add_paragraph().paragraph_format.space_before = Pt(12)
+    run = p.add_run()
+    run.add_break(WD_BREAK.PAGE)
 
     #percorrer os campos de cada cenário
-    passos = (lista_dados - 9)/2
+    passos = (lista_dados - 13) #/2
     count1 = 1
     while count1 <= int(passos):
         cen_passo = 'passo_'+str(count1)
-        cen_resultado = 'resultado_'+str(count1)
+        #cen_resultado = 'resultado_'+str(count1)
 
         evidencia = pasta_evidencias+'/'+cen_passo+'.png'
 
@@ -70,19 +90,25 @@ while count <= lista_cen:
         p = doc.add_paragraph()
         p.add_run(txt_passo).bold = True
         p.add_run(str(dados[cen][cen_passo]))
-
-        p = doc.add_paragraph()
-        p.add_run('Resultado esperado: ').bold = True
-        p.add_run(str(dados[cen][cen_resultado]))
+        p1 = doc.add_paragraph()
+        p1.add_run("Resultado: ").bold = True
+        p2 = doc.add_paragraph().paragraph_format.space_before = Pt(4)
+        
+        #p.add_run(str(dados[cen][cen_resultado]))
 
         doc.add_picture(evidencia, width=Inches(6))
-        p = doc.add_paragraph().paragraph_format.space_before = Pt(6)
+
+        if count1 < int(passos):
+            p = doc.add_paragraph()
+            run = p.add_run()
+            run.add_break(WD_BREAK.PAGE)
+    
         #os.remove(evidencia)
 
         count1 = count1+1
 
     nome_cenario = str(dados[cen]['cen_nome'])
-    path_doc = str(dados[cen]['pasta_evidencias'])+'/'+nome_cenario[0:21]+' - '+str(dados[cen]['cen_dispositivo'])+'.docx'
+    path_doc = str(dados[cen]['pasta_evidencias'])+'/'+nome_cenario[0:21]+' - '+str(dados[cen]['cen_plataforma'])+'.docx'
     doc.save(path_doc)
     print("==============================================================\n")
     print("Evidência "+nome_cenario[0:21]+" Gerada com sucesso!")

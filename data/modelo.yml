@@ -2,17 +2,17 @@ cenario_1:
   cen_nome: 
   cen_desc: 
   cen_pre_requisitos: 
-  cen_data_execucao: 
-  cen_executor: 
-  cen_status_execucao:
-  cen_massa: 
+  resultado_esperado: 
+  cen_plataforma: 
   cen_dispositivo: 
-  pasta_evidencias: /Users/user/Documents/evidencias/cenario_1
+  cen_versao_software: 
+  cen_versao_app: 
+  cen_executor: 
+  cen_massa: 
+  cen_data_execucao: 
+  cen_status_execucao: 
+  pasta_evidencias: /Users/user/evidencias/cenario_1
   passo_1: 
-  resultado_1: 
   passo_2: 
-  resultado_2: 
   passo_3: 
-  resultado_3: 
-  passo_:
-  resultado_:
+  passo_4: 
