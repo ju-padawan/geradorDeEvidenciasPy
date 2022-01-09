@@ -42,7 +42,7 @@ while count <= lista_cen:
     p.add_run(str(dados[cen]['resultado_esperado']))
 
     p = doc.add_paragraph()
-    p.add_run('Disposiitivo uilizado: ').bold = True
+    p.add_run('Plataforma: ').bold = True
     p.add_run(str(dados[cen]['cen_plataforma']))
 
     p = doc.add_paragraph()
