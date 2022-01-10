@@ -3,6 +3,7 @@ from docx.text.run import *
 from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
+from docx.shared import RGBColor
 import yaml
 import os
 
@@ -87,9 +88,14 @@ class SupportActions():
             self.inserir_quebra_de_pagina()
 
 
-    def salvar_arquivo_evidencia(self, nome_cenario, path):
+    def salvar_arquivo_evidencia(self, nome_cenario, path, status, plataforma):
         try:
-            self.doc.save(path)
+            if "Sucesso" in status:
+                path_doc = path+'/'+nome_cenario+"_"+plataforma+"_Sucesso"+".docx"
+            else:
+                path_doc = path+'/'+nome_cenario+"_"+plataforma+"_Falha"+".docx"
+                
+            self.doc.save(path_doc)
             print("\n>>>> Evidência "+nome_cenario+" Gerada com sucesso! <<<<")
             print("\n==================================================================================")
         except BaseException as error:
@@ -98,6 +104,21 @@ class SupportActions():
 
     def exibir_informacao_console(self, texto):
         print(texto)
+
+    def inserir_status_colorido(self, texto, status):
+        if "Sucesso" in status:
+            paragrafo = self.doc.add_paragraph()
+            paragrafo.add_run(texto).bold = True
+            run = paragrafo.add_run(status)
+            font = run.font
+            font.color.rgb = RGBColor(0, 128, 0)
+
+        elif "Falha" in status:
+            paragrafo = self.doc.add_paragraph()
+            paragrafo.add_run(texto).bold = True
+            run = paragrafo.add_run(status)
+            font = run.font
+            font.color.rgb = RGBColor(255, 0, 0)
 
     
 

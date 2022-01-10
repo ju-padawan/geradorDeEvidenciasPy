@@ -41,7 +41,7 @@ while count <= lista_cen:
     actions.inserir_informacoes_arquivo_evidencia("Executado por: ", str(dados_evidencia[cen]['cen_executor']))
     actions.inserir_informacoes_arquivo_evidencia("Massa uilizada: ", str(dados_evidencia[cen]['cen_massa']))
     actions.inserir_informacoes_arquivo_evidencia("Data da execução: ", str(dados_evidencia[cen]['cen_data_execucao']))
-    actions.inserir_informacoes_arquivo_evidencia("Status execução: ", str(dados_evidencia[cen]['cen_status_execucao']))
+    actions.inserir_status_colorido("Status execução: ", str(dados_evidencia[cen]['cen_status_execucao']))
 
     actions.inserir_quebra_de_pagina()
 
@@ -78,6 +78,5 @@ while count <= lista_cen:
         count1 = count1+1
 
     nome_cenario = str(dados_evidencia[cen]['cen_nome'])
-    path_doc = str(dados_evidencia[cen]['pasta_evidencias'])+'/'+nome_cenario[0:21]+' - '+str(dados_evidencia[cen]['cen_plataforma'])+'.docx'
-    actions.salvar_arquivo_evidencia(str(nome_cenario[0:21]), str(path_doc))
+    actions.salvar_arquivo_evidencia(str(nome_cenario[0:21]), str(dados_evidencia[cen]['pasta_evidencias']), str(dados_evidencia[cen]['cen_status_execucao']), str(dados_evidencia[cen]['cen_plataforma']))
     count = count+1
