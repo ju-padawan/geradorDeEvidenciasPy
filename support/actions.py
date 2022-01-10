@@ -76,22 +76,28 @@ class SupportActions():
     def inserir_espaco_apos_paragrafo(self, espaco):
         self.doc.add_paragraph().paragraph_format.space_before = Pt(espaco)
 
-    def inserir_imagem_arquivo_evidencia(self, imagem):
-        try:
+
+    def inserir_imagem_arquivo_evidencia(self, imagem, msg_erro, posicao=None):
+        if os.path.exists(imagem):
             self.doc.add_picture(imagem, width=Inches(6))
-        except BaseException as error:
-            print(f"Unexpected {error=}, {type(error)=}")
-            raise
+        else:
+            print(msg_erro)
+
+        if posicao != None:
+            self.inserir_quebra_de_pagina()
+
 
     def salvar_arquivo_evidencia(self, nome_cenario, path):
         try:
             self.doc.save(path)
-            print("==============================================================\n")
-            print("Evidência "+nome_cenario+" Gerada com sucesso!")
-            print("\n==============================================================")
+            print("\n>>>> Evidência "+nome_cenario+" Gerada com sucesso! <<<<")
+            print("\n==================================================================================")
         except BaseException as error:
             print(f"Unexpected {error=}, {type(error)=}")
             raise
+
+    def exibir_informacao_console(self, texto):
+        print(texto)
 
     
 

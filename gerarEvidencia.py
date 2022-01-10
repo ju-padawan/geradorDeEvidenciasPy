@@ -22,6 +22,10 @@ while count <= lista_cen:
     lista_dados = len(dados_evidencia[cen])
     pasta_evidencias = dados_evidencia[cen]['pasta_evidencias']
 
+    cenario = str(dados_evidencia[cen]['cen_nome'])
+    actions.exibir_informacao_console("==================================================================================")
+    actions.exibir_informacao_console("Gerando evidência paro o cenário de teste >> "+cenario[0:21])
+
     actions.formatacao_arquivo_evidencia()
 
     #actions.inserir_cabecalho_arquivo_evidencia(0, str(dados_evidencia[cen]['cen_nome']), "simples")
@@ -41,6 +45,18 @@ while count <= lista_cen:
 
     actions.inserir_quebra_de_pagina()
 
+    actions.inserir_informacoes_arquivo_evidencia("Selecionando a Esteira", " ")
+    evidencia_esteira = pasta_evidencias+"/esteira.png"
+    actions.inserir_imagem_arquivo_evidencia(evidencia_esteira, "\nNão foi possível inserir a evidência da seleção de esteira...", "final")
+    
+    actions.inserir_informacoes_arquivo_evidencia("Tela inicial do APP", " ")
+    evidencia_tela_inico_app = pasta_evidencias+"/inicio_app.png"
+    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_inico_app, "\nNão foi possível inserir evidência da tela inicial do APP...", "final")
+    
+    actions.inserir_informacoes_arquivo_evidencia("Tela de Login do APP", " ")
+    evidencia_tela_login = pasta_evidencias+"/login_app.png"
+    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_login, "\nNão foi possível inserir evidência da tela de login do APP...", "final")
+
     #percorrer os campos de cada cenário
     passos = (lista_dados - 13)
     count1 = 1
@@ -53,7 +69,8 @@ while count <= lista_cen:
         actions.inserir_informacoes_arquivo_evidencia(txt_passo, str(dados_evidencia[cen][cen_passo]))
         actions.inserir_informacoes_arquivo_evidencia("Resultado:", " ")
         actions.inserir_espaco_apos_paragrafo(4)
-        actions.inserir_imagem_arquivo_evidencia(evidencia)
+
+        actions.inserir_imagem_arquivo_evidencia(evidencia, "\nNão foi possível inserir evidência para o "+cen_passo+"...")
 
         if count1 < int(passos):
             actions.inserir_quebra_de_pagina()
