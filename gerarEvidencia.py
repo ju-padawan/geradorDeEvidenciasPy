@@ -47,15 +47,18 @@ while count <= lista_cen:
 
     actions.inserir_informacoes_arquivo_evidencia("Selecionando a Esteira", " ")
     evidencia_esteira = pasta_evidencias+"/esteira.png"
-    actions.inserir_imagem_arquivo_evidencia(evidencia_esteira, "\nNão foi possível inserir a evidência da seleção de esteira...", "final")
+    actions.inserir_imagem_arquivo_evidencia(evidencia_esteira, "\nNão foi possível inserir a evidência da seleção de esteira...")
+    actions.inserir_quebra_de_pagina()
     
     actions.inserir_informacoes_arquivo_evidencia("Tela inicial do APP", " ")
     evidencia_tela_inico_app = pasta_evidencias+"/inicio_app.png"
-    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_inico_app, "\nNão foi possível inserir evidência da tela inicial do APP...", "final")
+    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_inico_app, "\nNão foi possível inserir evidência da tela inicial do APP...")
+    actions.inserir_quebra_de_pagina()
     
     actions.inserir_informacoes_arquivo_evidencia("Tela de Login do APP", " ")
     evidencia_tela_login = pasta_evidencias+"/login_app.png"
-    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_login, "\nNão foi possível inserir evidência da tela de login do APP...", "final")
+    actions.inserir_imagem_arquivo_evidencia(evidencia_tela_login, "\nNão foi possível inserir evidência da tela de login do APP...")
+    actions.inserir_quebra_de_pagina()
 
     #percorrer os campos de cada cenário
     passos = (lista_dados - 13)
@@ -67,8 +70,8 @@ while count <= lista_cen:
                 
         actions.inserir_espaco_antes_paragrafo(2)
         actions.inserir_informacoes_arquivo_evidencia(txt_passo, str(dados_evidencia[cen][cen_passo]))
-        actions.inserir_informacoes_arquivo_evidencia("Resultado:", " ")
-        actions.inserir_espaco_apos_paragrafo(4)
+        actions.inserir_informacoes_arquivo_evidencia("Resultado:", "")
+        #actions.inserir_espaco_apos_paragrafo(2)
 
         actions.inserir_imagem_arquivo_evidencia(evidencia, "\nNão foi possível inserir evidência para o "+cen_passo+"...")
 

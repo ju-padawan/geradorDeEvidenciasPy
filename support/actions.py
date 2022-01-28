@@ -78,14 +78,11 @@ class SupportActions():
         self.doc.add_paragraph().paragraph_format.space_before = Pt(espaco)
 
 
-    def inserir_imagem_arquivo_evidencia(self, imagem, msg_erro, posicao=None):
+    def inserir_imagem_arquivo_evidencia(self, imagem, msg_erro):
         if os.path.exists(imagem):
-            self.doc.add_picture(imagem, width=Inches(6))
+            self.doc.add_picture(imagem, width=Inches(5.75))
         else:
             print(msg_erro)
-
-        if posicao != None:
-            self.inserir_quebra_de_pagina()
 
 
     def salvar_arquivo_evidencia(self, nome_cenario, path, status, plataforma):
